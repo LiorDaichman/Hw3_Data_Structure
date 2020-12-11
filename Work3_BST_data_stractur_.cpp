@@ -41,13 +41,13 @@ int main() {
 	//Enter Student Midterm Grade
 	updateMidtermGrade(tree, 300, 50);
 	updateMidtermGrade(tree, 100, 70);
-	updateMidtermGrade(tree, 200, 13);
+	updateMidtermGrade(tree, 200, 70);
 	updateMidtermGrade(tree, 700, 33);
 	updateMidtermGrade(tree, 600, 100);
 	updateMidtermGrade(tree, 800, 72);
 	//Enter Student Exam Grade
 	updateExamGrade(tree, 300, 100);
-	updateExamGrade(tree, 100, 70);
+	updateExamGrade(tree, 100, 81);
 	updateExamGrade(tree, 200, 54);
 	updateExamGrade(tree, 700, 57);
 	updateExamGrade(tree, 600, 100);
@@ -235,45 +235,10 @@ int ExcellentCounter(StudentNode* node, BST* tree) {
 	return ExcellentCounter(node->left, tree) + ExcellentCounter(node->right, tree) + IsXLent(getFinalGrade(tree, node->ID));
 }
 
-
-
-void checkstatus(StudentNode* node, BST* tree,int* G,int*V,int*E) {
-
-	if (node != NULL) {
-		checkstatus(node->left, tree,G,V,E);
-		int tempgrade = getFinalGrade(tree, node->ID);
-		if (56 <= tempgrade && tempgrade <= 75)
-			G += 1;
-		else if (76 <= tempgrade && tempgrade <= 94)
-			V++;
-		else if (95 <= tempgrade && tempgrade <= 100)
-			E++;
-		checkstatus(node->right, tree,G,V,E);
-	}
-	
-}
-
-
-
-//
-//void PrintData(StudentNode* node, BST* tree) {
-//	if (node != NULL) {
-//		PrintData(node->left, tree);
-//		printf("%d\t%d\t%d\t%d\n", node->ID, node->midTestGrade, node->testGrade, getFinalGrade(tree, node->ID));
-//		PrintData(node->right, tree);
-//
-//	}
-//}
-
-
-
-
 void RepostStatistics(BST* tree) {
 
 	StudentNode* node = tree->root;
 	int good = GoodCounter(node,tree), veryGood = VeryGoodCounter(node,tree), excellent = ExcellentCounter(node,tree);
-	int* ptrgood = &good;
-	checkstatus(node, tree,ptrgood,&veryGood,&excellent);
 	printf("\t  Degree\t final grade\n");
 	printf("Good\t  (56-75)\t %d\nVery good (76-94)\t %d\nExcellent (95-100)\t %d\n", good, veryGood, excellent);
 
